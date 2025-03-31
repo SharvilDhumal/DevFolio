@@ -1,0 +1,109 @@
+/* Animated Gradient Background */
+.gradient-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(45deg, #2b1055, #7597de, #4e54c8, #2c3e50);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Wave container and content */
+.wave-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 4rem 2rem;
+}
+
+.wave-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animated waves */
+.wave-container::before,
+.wave-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: 50% 80px;
+  opacity: 0.3;
+}
+
+.wave-container::before {
+  bottom: 0;
+  background-image: linear-gradient(
+    45deg,
+    transparent 33%,
+    rgba(255, 255, 255, 0.1) 33%,
+    rgba(255, 255, 255, 0.1) 66%,
+    transparent 66%
+  );
+  animation: wave 15s linear infinite;
+}
+
+.wave-container::after {
+  bottom: 15px;
+  background-image: linear-gradient(
+    45deg,
+    transparent 33%,
+    rgba(255, 255, 255, 0.05) 33%,
+    rgba(255, 255, 255, 0.05) 66%,
+    transparent 66%
+  );
+  animation: wave 10s linear infinite;
+}
+
+/* Cursor ripple effect */
+.cursor-ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wave-container {
+    padding: 3rem 1rem;
+  }
+
+  .wave-container::before,
+  .wave-container::after {
+    background-size: 100% 40px;
+  }
+}
